@@ -36,7 +36,7 @@ function App() {
             className="m-1 custom-btn-style"
              >Update Token (if about to expire)</button>  {/** 10 seconds */}
 
-          <button onClick={() => { keycloak.logout({ redirectUri: 'http://localhost:5175/' }) }}
+          <button onClick={() => { keycloak.logout({ redirectUri: 'http://localhost:5174/' }) }}
             className="m-1 custom-btn-style"
              >Logout</button>
 

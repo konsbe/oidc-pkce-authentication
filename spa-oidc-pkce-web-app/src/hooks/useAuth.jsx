@@ -7,7 +7,7 @@ import Keycloak from 'keycloak-js';
 
 const keycloakInit = new Keycloak({
   url: 'http://localhost:8080/',
-  realm: 'spa-oidc-pkce',
+  realm: 'oidc-pkce',
   clientId: 'spa-oidc-pkce-client',
 });
 

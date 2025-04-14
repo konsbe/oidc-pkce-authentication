@@ -43,8 +43,80 @@ We now use a Go backend that securely handles all OIDC operations:
 | APIs called from browser             | Optional                  |
 | APIs called via backend              | ✅                        |
 | Resistant to XSS                     | ✅                        |
+Absolutely! Here's a clean, consistent, and nicely formatted version of your **Keycloak setup** section for the README:
 
-## Authentication Flow
+---
+
+## 🛠️ Keycloak Setup
+
+### 1. Start Keycloak (Dev Mode)
+Run the following command in your terminal to start Keycloak:
+
+```bash
+docker run -p 8080:8080 \
+  -e KC_BOOTSTRAP_ADMIN_USERNAME=admin \
+  -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin \
+  quay.io/keycloak/keycloak:26.2.0 start-dev
+```
+
+
+### 2. Access Keycloak Admin Console
+
+- Visit [http://localhost:8080](http://localhost:8080)
+- Log in with:
+  - **Username**: `admin`
+  - **Password**: `admin`
+
+
+### 3. Realm Setup
+
+- Create a new realm named: `oidc-pkce`
+
+
+### 4. Client Configuration
+
+#### 🧠 Public Client: SPA (Frontend)
+- **Client ID**: `spa-oidc-pkce-client`
+- **Access Type**: `Public`
+- **Valid Redirect URIs**: `http://localhost:5174/*`
+- **Post Logout Redirect URIs**: `http://localhost:5174/*`
+- **Authentication Flows**:
+  - Standard Flow: ✅ Enabled
+  - Direct Access Grants: ✅ Enabled
+  - Implicit Flow: ❌ Disabled
+  - Service Accounts: ❌ Disabled
+  - Device Authorization Grant: ❌ Disabled
+  - CIBA Grant: ❌ Disabled
+- **Client Authentication**: ❌ Disabled
+- **Authorization**: ❌ Disabled
+
+#### 🔐 Backend Client: Go OIDC Proxy
+- **Client ID**: `backend-oidc-pkce-client`
+- **Access Type**: `Public`
+- **Valid Redirect URIs**: `http://localhost:3000/callback`
+- **Post Logout Redirect URIs**: `http://localhost:5175/*`
+- **Authentication Flows**:
+  - Standard Flow: ✅ Enabled
+  - Direct Access Grants: ✅ Enabled
+  - Implicit Flow: ❌ Disabled
+  - Service Accounts: ❌ Disabled
+  - Device Authorization Grant: ❌ Disabled
+  - CIBA Grant: ❌ Disabled
+- **Client Authentication**: ❌ Disabled
+- **Authorization**: ❌ Disabled
+
+
+### 5. Create a Test User (Optional)
+
+- Create a user with:
+  - Username
+  - Email (mark as **verified** if needed)
+  - Set a password manually
+  - Ensure the user is enabled
+
+---
+
+## Authentication Flow for Backend Session base OIDC
 
 ```text
 User → React Frontend → [Go Backend] → Redirect to Keycloak
@@ -70,6 +142,8 @@ User → React Frontend → [Go Backend] → Redirect to Keycloak
 
 Note: Since our app does not rely on Keycloak’s browser session (e.g., `keycloak.js`), the Keycloak Admin UI does not display an active user session. This is normal.
 
+---
+
 ## Project Structure
 
 - **React App (Vite)**
@@ -82,6 +156,8 @@ Note: Since our app does not rely on Keycloak’s browser session (e.g., `keyclo
   - Uses `gorilla/sessions` for secure session cookies
   - Implements `/auth/login`, `/auth/callback`, `/auth/session`, and `/auth/token`
 
+---
+
 ## Tech Stack
 
 | Component                | Technology                     |
@@ -92,6 +168,8 @@ Note: Since our app does not rely on Keycloak’s browser session (e.g., `keyclo
 | Frontend Framework       | React + Vite                     |
 | Identity Provider        | Keycloak                         |
 | Module Management (Go)   | `go mod`                         |
+
+---
 
 ## Setup Instructions
 
@@ -128,6 +206,8 @@ npm run dev
 go run main.go
 ```
 
+---
+
 ## Key Endpoints
 
 | Endpoint         | Description                                    |
@@ -136,6 +216,8 @@ go run main.go
 | `GET /auth/callback` | Handles OAuth2 redirect and stores session   |
 | `GET /auth/session`  | Returns safe user info from session          |
 | `GET /auth/token`    | Returns access token (no refresh token)      |
+
+---
 
 ## Future Enhancements
 - ✅ Implement logout with Keycloak session termination

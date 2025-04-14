@@ -21,7 +21,7 @@ func main() {
 
 	// Configuration
 	clientID := "backend-oidc-pkce-client"
-	keycloakURL := "http://127.0.0.1:8080/realms/oidc-pkce"
+	keycloakURL := "http://localhost:8080/realms/oidc-pkce"
 	redirectURL := "http://localhost:3000/callback"
 	gob.Register(map[string]interface{}{})
 
