@@ -1,4 +1,5 @@
-# Secure OIDC Authentication with React + Go Backend + Keycloak
+# Secure OIDC (PKCE) Authentication with React + Go Backend + Keycloak
+[OIDC-PKCE auth documentation by Okta](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)
 
 This project demonstrates a secure OpenID Connect (OIDC) authentication architecture using:
 - A **React (Vite) Single Page Application (SPA)**

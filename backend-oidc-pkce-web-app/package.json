@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@testing-library/react": "^16.3.0",
+    "backend-oidc-pkce-web-app": "file:",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

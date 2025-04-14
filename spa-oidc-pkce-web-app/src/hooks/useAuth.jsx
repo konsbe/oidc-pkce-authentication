@@ -18,7 +18,8 @@ const useAuth = () => {
     useEffect(() => {
             
       keycloakInit.init({
-        onLoad: 'login-required', // Supported values: 'check-sso' , 'login-required'
+        onLoad: 'check-sso',  //  checks if the user has an active SSO session and logs them in only if already authenticated, otherwise stays on the public view
+        // onLoad: 'login-required', //  forcing login on every app load. Supported values: 'check-sso' , 'login-required'
         checkLoginIframe: true,
         pkceMethod: 'S256'
       }).then((auth) => {

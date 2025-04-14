@@ -40,7 +40,7 @@ function App() {
             className="m-1 custom-btn-style"
              >Logout</button>
 
-          <button onClick={() => { setInfoMessage(keycloak.hasRealmRole('spa-oidc-pkce').toString()) }}
+          <button onClick={() => { setInfoMessage(keycloak.hasRealmRole('spa-oidc-pkce-role').toString()) }}
             className="m-1 custom-btn-style"
              >has realm role "spa-oidc-pkce"</button>
 
