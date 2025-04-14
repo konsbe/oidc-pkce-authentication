@@ -43,7 +43,7 @@ We now use a Go backend that securely handles all OIDC operations:
 | APIs called from browser             | Optional                  |
 | APIs called via backend              | ✅                        |
 | Resistant to XSS                     | ✅                        |
-Absolutely! Here's a clean, consistent, and nicely formatted version of your **Keycloak setup** section for the README:
+
 
 ---
 
