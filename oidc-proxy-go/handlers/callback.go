@@ -18,7 +18,7 @@ func HandleCallback(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to get session", http.StatusUnauthorized)
 		return
 	}
-	log.Println("session: ", session)
+
 	// Verify state matches
 	queryState := r.URL.Query().Get("state")
 	if queryState != session.Values["state"] {
