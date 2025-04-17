@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 
-export default function useOIDCAUTH() {
+export default function useAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("http://localhost:3000/auth/session", {
       credentials: "include",
+      // headers: {
+      //   Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}` // Add your client secret here if client authentication and authorization is enable
+      // }
     })
-      .then(res => {
-        console.log("res: ", res);
-        
+      .then(res => {        
         if (res.status === 401) {
           window.location.href = "http://localhost:3000/login";
           return null;
@@ -18,7 +19,6 @@ export default function useOIDCAUTH() {
         return res.json();
       })
       .then(data => {
-        console.log("data: ", data);
         
         if (data) setUser(data);
         setLoading(false);

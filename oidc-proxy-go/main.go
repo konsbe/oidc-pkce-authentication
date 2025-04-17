@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/coreos/go-oidc/v3/oidc"
 	"github.com/go-chi/chi/v5"
@@ -23,7 +24,10 @@ func main() {
 	clientID := "backend-oidc-pkce-client"
 	keycloakURL := "http://localhost:8080/realms/oidc-pkce"
 	redirectURL := "http://localhost:3000/callback"
+
+	// ✅ Register types used in session store
 	gob.Register(map[string]interface{}{})
+	gob.Register(time.Time{}) // ✅ Fix for the securecookie gob error
 
 	// Init OIDC provider
 	provider, err := oidc.NewProvider(ctx, keycloakURL)
@@ -34,6 +38,7 @@ func main() {
 	// OIDC config
 	oidcConfig := &oidc.Config{
 		ClientID: clientID,
+		// ClientSecret: "your-client-secret", // Add your client secret here if client authentication and authorization is enable
 	}
 
 	oauthConfig := &oauth2.Config{

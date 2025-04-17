@@ -7,7 +7,6 @@ const getToken = async (setInfoMessage) => {
   const res = await fetch('http://localhost:3000/auth/token', {
     credentials: 'include',
   });
-  console.log("resss: ", res);
   
   if (!res.ok) {
     setInfoMessage('❌ Not authenticated or token missing');
