@@ -13,7 +13,7 @@ sequenceDiagram
         Browser (SPA)->>IdentityProvider: Exchange Code for Tokens (POST)
         IdentityProvider-->>Browser (SPA): Return ID Token + Access Token
         Browser (SPA)->>Browser (SPA): Store Tokens
-        Browser (SPA)-->>User : Store Tokens
     else Token valid
+        Browser (SPA)-->>User : Show web-app page
         Browser (SPA)->>Browser (SPA): Use token for API calls
     end
