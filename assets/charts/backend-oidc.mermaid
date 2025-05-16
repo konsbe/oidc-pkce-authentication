@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant User
+    participant Web App (Browser)
+    participant Authentication Service
+    participant IDP
+
+    User->>Web App (Browser): Access Web App
+    Web App (Browser)->>Web App (Browser): Check IDP Session
+    alt No Session Exists
+        Web App (Browser)-->>User: 401 Unauthorized
+        User->>Web App (Browser): Trigger /login
+        Web App (Browser)->>Authentication Service: Redirect /login
+        Authentication Service-->>User: 302 to IDP Auth
+        User->>IDP: Authenticate
+        IDP-->>User: 302 to /callback with auth code
+        User->>Authentication Service: Call /callback with code
+        Authentication Service->>IDP: Exchange code for tokens
+        IDP-->>Authentication Service: Return tokens
+        Authentication Service->>Authentication Service: Store tokens, set session cookie
+        Web App (Browser)->>Authentication Service: Request /auth/session
+        Authentication Service-->>Web App (Browser): 200 OK with user info
+        Web App (Browser)-->>User: Show NCMT page
+    else Session Exists
+        Web App (Browser)->>Authentication Service: Request /auth/session
+        Authentication Service-->>Web App (Browser): 200 OK with user info
+        Web App (Browser)-->>User: Show Web App page
+    end

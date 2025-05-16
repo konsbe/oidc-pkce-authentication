@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant User
+    participant Browser (SPA)
+    participant IdentityProvider
+
+    User->>Browser (SPA): Access Application
+    Browser (SPA)->>Browser (SPA): Check local token
+    alt No token or expired
+        Browser (SPA)->>IdentityProvider: Redirect to IDP Endpoint (with PKCE)
+        IdentityProvider->>User: Prompt Login
+        User->>IdentityProvider: Submit Credentials
+        IdentityProvider-->>Browser (SPA): Redirect with Auth Code
+        Browser (SPA)->>IdentityProvider: Exchange Code for Tokens (POST)
+        IdentityProvider-->>Browser (SPA): Return ID Token + Access Token
+        Browser (SPA)->>Browser (SPA): Store Tokens
+        Browser (SPA)-->>User : Store Tokens
+    else Token valid
+        Browser (SPA)->>Browser (SPA): Use token for API calls
+    end

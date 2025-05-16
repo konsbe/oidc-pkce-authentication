@@ -179,6 +179,12 @@ The flow describes the Backend Authentication Service (AS) OIDC Authentication C
     * The backend uses the associated access token to authorize the request to the protected resource.
     * The backend processes the request and returns the appropriate response to the front-end.
 
+
+<!-- ![backend oidc](./backend-oidc.svg) -->
+<img src="https://raw.githubusercontent.com/konsbe/oidc-pkce-authentication/main/assets/charts/spa-oidc.svg" alt="SPA oidc authentication flow" width="300" height="400" style="background:white;" />
+<img src="https://raw.githubusercontent.com/konsbe/oidc-pkce-authentication/main/assets/charts/backend-oidc.svg" alt="Athentication flow with a Backend Authentication Server" width="300" height="400" style="background:white;" />
+
+
 ---
 
 ## 🛠️ Keycloak Setup
@@ -326,7 +332,9 @@ go get github.com/gorilla/sessions
 Ensure your realm and client:
 - Enable `Standard Flow` (Authorization Code)
 - Enable `PKCE`
-- Redirect URI points to your Go backend `/auth/callback`
+- Redirect URI points 
+    - for your Go backend 'backend-oidc-pkce-client' `https:<domain>/auth/callback`
+    - for your SPA 'spa-oidc-pkce-client' `https:<domain>/*`
 
 ### 4. Start the React frontend
 ```bash
