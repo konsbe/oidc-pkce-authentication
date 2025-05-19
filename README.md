@@ -181,8 +181,10 @@ The flow describes the Backend Authentication Service (AS) OIDC Authentication C
 
 
 <!-- ![backend oidc](./backend-oidc.svg) -->
-<img src="https://raw.githubusercontent.com/konsbe/oidc-pkce-authentication/main/assets/charts/spa-oidc.svg" alt="SPA oidc authentication flow" width="300" height="400" style="background:white;" />
-<img src="https://raw.githubusercontent.com/konsbe/oidc-pkce-authentication/main/assets/charts/backend-oidc.svg" alt="Athentication flow with a Backend Authentication Server" width="300" height="400" style="background:white;" />
+<p align="center">
+    <img src="https://raw.githubusercontent.com/konsbe/oidc-pkce-authentication/main/assets/charts/spa-oidc.svg" alt="SPA oidc authentication flow" width="300" height="400" style="background:white;" />
+    <img src="https://raw.githubusercontent.com/konsbe/oidc-pkce-authentication/main/assets/charts/backend-oidc.svg" alt="Athentication flow with a Backend Authentication Server" width="300" height="400" style="background:white;" />
+</p>
 
 
 ---
