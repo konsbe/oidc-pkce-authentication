@@ -18,8 +18,9 @@ sequenceDiagram
         IDP-->>Authentication Service: Return tokens
         Authentication Service->>Authentication Service: Store tokens, set session cookie
         Web App (Browser)->>Authentication Service: Request /auth/session
+    else Session Exists
         Authentication Service-->>Web App (Browser): 200 OK with user info
-        Web App (Browser)-->>User: Show NCMT page
+        Web App (Browser)-->>User: Show Web app page
     else Session Exists
         Web App (Browser)->>Authentication Service: Request /auth/session
         Authentication Service-->>Web App (Browser): 200 OK with user info
