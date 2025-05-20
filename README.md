@@ -40,7 +40,7 @@ This flow describes how a Single Page Application (SPA) user authenticates with 
 2.  **Redirect to Authorization Server (IDP):**
     * The SPA constructs an authorization request including the following as a payload:
         * `response_type`: `id_token token`
-        * `client_id`: `ncmt-client`
+        * `client_id`: `web-app-client`
         * `redirect_uri`: `http://<spa-domain-name>/`
         * `state`: `<467e8ace-05c7-4922-b95f-f75b783d9069>`
         * `nonce`: `<33a3b6b2-6d99-4f61-a01c-8bcb8cc3da3e69e8>`
@@ -48,7 +48,7 @@ This flow describes how a Single Page Application (SPA) user authenticates with 
         * `response_mode`: `fragment`
         * `code_challenge`: `<kaq2gLU8wq8x2r7pNJPUxfXTDgJd-tbmWOB3361CHBY>`
         * `code_challenge_method`: `S256`
-    * The SPA redirects the user's browser to the OIDC provider's authorization endpoint (e.g., `http://<keycloak-domain>/realms/ncmt/protocol/openid-connect/auth`) with the constructed query parameters.
+    * The SPA redirects the user's browser to the OIDC provider's authorization endpoint (e.g., `http://<keycloak-domain>/realms/web-app/protocol/openid-connect/auth`) with the constructed query parameters.
 
 3.  **User Authentication (Browser -> IDP):**
     * The user interacts with Keycloak (e.g., by entering their credentials).
@@ -61,22 +61,16 @@ This flow describes how a Single Page Application (SPA) user authenticates with 
         ```
         http://<spa-domain-name>/#id_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFiY2QifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNjg0MTYwMDAwfQ.signature&access_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVmZ2gifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSIsImV4cCI6MTY4NDE2MzYwMH0.anothersignature&token_type=Bearer&expires_in=3600&state=467e8ace-05c7-4922-b95f-f75b783d9069&session_state=some_session_id
         ```
-    * The SPA's JavaScript code running in the browser extracts these parameters and **detects the presence of the authorization code**. Then, it makes a **direct** client-side POST request to the Keycloak token endpoint (e.g., `http://<keycloak-domain>/realms/ncmt/protocol/openid-connect/token`) with the following parameters included in the request body (typically as `application/x-www-form-urlencoded`):
+    * The SPA's JavaScript code running in the browser extracts these parameters and **detects the presence of the authorization code**. Then, it makes a **direct** client-side POST request to the Keycloak token endpoint (e.g., `http://<keycloak-domain>/realms/web-app/protocol/openid-connect/token`) with the following parameters included in the request body (typically as `application/x-www-form-urlencoded`):
         * `grant_type`: `authorization_code`
-        * `client_id`: `ncmt-client`
-        * `code`: `723033e-80ce-45fd-bbbc-abdb17b3bbba9a.aebb6951-b3c1-4f26-a5e8-c0aa5b31b63a.6d99f1ef-e616-401c-8bcb-5cc3da3e69e8`
-        * `redirect_uri`: `http://<spa-domain-name>/`
-        * `code_verifier`: `G783f675-c02f-418a-876f-91362f294c1a`
-        * `grant_type`: `authorization_code`
-        * `client_id`: `ncmt-client`
         * `redirect_uri`: `http://<spa-domain-name>/`
         * `code`: `v3a3bmZCUlZWZ0hUaHROZ0F4YseGV0ZFRxJOSMCZUq7ua9enJmEM8vmgMZvGx5dGKXaqgY`
         * `grant_type`: `authorization_code`
-        * `client_id`: `ncmt-client`
+        * `redirect_uri`: `http://<spa-domain-name>/`
         * `authorization_code`: grant type, authorization_code
-        * `redirect_uri`: MUST match the earlier secret generated during the initial authorization request, as part of PKCE).
+        * `code_verifier`: `G783f675-c02f-418a-876f-91362f294c1a` (secret generated during the initial authorization as part of PKCE)
         * `client_secret`: `<your-client-secret>`
-        * `client_id`: `client_id_ncmt`
+        * `client_id`: `client_id_web_app`
 
 5.  **Receive Tokens (IDP -> SPA):**
     * The Keycloak server validates the authorization code, client credentials (implicitly through the client ID), `redirect_uri`, and `code_verifier`.
@@ -113,7 +107,7 @@ With the use of a Go backend that securely handles all OIDC operations:
 
 This document outlines the OIDC (OpenID Connect) Authentication Code Flow with backend authentication service (AS) securely authenticates users (on web applications) by redirecting them to the OIDC provider (like Keycloak), which handles the authentication and consent process. Upon successful authentication, the OIDC provider redirects the user back to the application with an authorization code. The backend service then exchanges this code for access and ID tokens on the server-side, and then exchanging an authorization code for an access token and ID token on the server-side, effectively shielding the client-side from sensitive information like tokens off the client-side and allowing the backend to manage access to protected resources.
 
-The flow describes the Backend Authentication Service (AS) OIDC Authentication Code Flow and how a user accesses the NCMT page (Browser) protected directly by the backend service.
+The flow describes the Backend Authentication Service (AS) OIDC Authentication Code Flow and how a user accesses the Web-App page (Browser) protected directly by the backend service.
 
 1.  **User Navigates to Web App Page (Browser):**
     * The user attempts to access a protected page.
@@ -179,13 +173,68 @@ The flow describes the Backend Authentication Service (AS) OIDC Authentication C
     * The backend uses the associated access token to authorize the request to the protected resource.
     * The backend processes the request and returns the appropriate response to the front-end.
 
-
-<!-- ![backend oidc](./backend-oidc.svg) -->
 <p align="center">
     <img src="https://raw.githubusercontent.com/konsbe/oidc-pkce-authentication/main/assets/charts/spa-oidc.svg" alt="SPA oidc authentication flow" width="300" height="400" style="background:white;" />
     <img src="https://raw.githubusercontent.com/konsbe/oidc-pkce-authentication/main/assets/charts/backend-oidc.svg" alt="Athentication flow with a Backend Authentication Server" width="300" height="400" style="background:white;" />
 </p>
 
+#### Back-end for Front-end framework
+Technically possible to implement the OIDC backend logic directly within the server-side of Next.js or a Vite-based Node.js backend or your choice framework. These frameworks provide the necessary server-side capabilities to handle HTTP requests, make calls to the OIDC provider (Keycloak), manage sessions, and set cookies. This approach introduces significant security risks and architectural challenges:
+
+1.  **Frontend Initiates Login:**
+    * The frontend (React components in Next.js or Vite) would still redirect the user to the OIDC provider (Keycloak) with the necessary authorization request parameters (client ID, redirect URI, scope, PKCE parameters, etc.). 
+
+2.  **Callback Handling (Server-Side):**
+    * The OIDC provider would redirect the user back to a specific API route within your Next.js application or a server-side route in your Vite/Node.js setup (e.g., `/api/auth/callback`). 
+
+3.  **Token Exchange (Server-Side): This API route would:**
+    * Receive the authorization code from the OIDC provider.
+    * Make a server-side POST request to Keycloak's token endpoint, including the authorization code, client ID, client secret, redirect URI, and PKCE code verifier.
+    * Receive the access token, ID token, and potentially the refresh token from Keycloak. 
+
+4.  **Session Management (Server-Side):**
+    * This API route would then:
+    * Verify the ID token (signature, claims, etc.).
+    * Create a server-side session for the user (e.g., using libraries like express-session or next-auth's built-in session management, or similar for a Vite/Node.js backend).
+    * Store session information (potentially including the access token, ID token, and refresh token in a secure server-side store like a database or in-memory cache).
+    * Set a secure `HttpOnly` session cookie in the user's browser to maintain the session.
+
+5.  **Providing Session Information:**
+    * You would create other API routes (e.g., `/api/auth/session`) to allow the frontend to check the authentication status by reading the session cookie. These routes would access the server-side session store to retrieve user information.
+ 
+6.  **Token Renewal (Server-Side):**
+    * If you implement refresh tokens, you would need another API route to handle token renewal when the access token expires. This route would use the refresh token (stored server-side) to request a new access token from Keycloak. 
+
+#### Security Risks of Implementing OIDC Logic Directly in the Frontend Framework's Server-Side
+
+**Secret Management:**
+* **Exposure in Deployment:** Storing your Keycloak client secret within the frontend application's server-side code increases the risk of accidental exposure through misconfigurations, log files, or vulnerabilities in the deployment environment.
+* **Increased Attack Surface:** The server-side of your frontend application, often more exposed than a dedicated, hardened backend service, becomes a more attractive target for attackers seeking to obtain sensitive client secrets.
+**Complexity and Maintainability:**
+* Integrating the complete OIDC flow (token handling, verification, session management, token renewal) significantly complicates the frontend application's server-side codebase. This added complexity makes the application harder to understand, maintain, debug, and evolve over time.
+**Scalability and Resource Usage:**
+* Burdening the frontend server with authentication logic alongside its primary task of serving the frontend can negatively impact its scalability and resource utilization, especially during periods of high user authentication activity.
+**Security Best Practices:**
+* Dedicated backend development often adheres to more stringent security best practices tailored for API and sensitive data handling. Embedding complex authentication logic within the frontend server might lead to overlooking crucial security considerations.
+**Framework-Specific Limitations:**
+* While frontend frameworks offer server-side capabilities, they might lack the fine-grained control and flexibility over low-level networking and security aspects that dedicated backend frameworks (like Go) provide.
+**Separation of Concerns:**
+* Mixing authentication responsibilities with the primary function of serving the user interface violates the principle of separation of concerns. This makes the application less modular, harder to test, and more challenging to adapt to changing requirements.
+
+#### Why a Dedicated Backend Service (like your Go implementation) is a Better Approach
+
+Employing a separate backend service, such as the Go application you've described, as a Backend for Frontend (BFF) for authentication offers several crucial advantages:
+
+**Dedicated Security Layer:**
+* Your Go backend acts as a dedicated security boundary, isolating the sensitive OIDC logic and your Keycloak client secret from the frontend application, significantly reducing the risk of exposure.
+**Clear Separation of Concerns:**
+* The frontend remains focused on its core responsibility of rendering the user interface and interacting with the user. It makes simple, well-defined requests to the backend for authentication status and protected resources. The backend handles the intricate details of the OIDC flow.
+**Centralized Authentication Logic:**
+* All authentication-related logic is consolidated within the backend service. This centralization simplifies management, updates, and the application of security measures.
+**Improved Scalability:**
+* You gain the flexibility to scale your authentication backend independently of your frontend application based on the specific demands of each component.
+**Enhanced Security Posture:**
+* A dedicated backend allows for a more focused approach to security, leveraging backend-specific security expertise and best practices to protect sensitive data and the authentication process.
 
 ---
 
