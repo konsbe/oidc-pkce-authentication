@@ -22,7 +22,7 @@ func main() {
 
 	// Configuration
 	clientID := "backend-oidc-pkce-client"
-	keycloakURL := "http://localhost:8080/realms/vomt"
+	keycloakURL := "http://localhost:8080/access/realms/vomt"
 	redirectURL := "http://localhost:3000/callback"
 
 	// ✅ Register types used in session store

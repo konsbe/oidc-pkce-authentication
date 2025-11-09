@@ -396,6 +396,9 @@ npm run dev
 
 ### 5. Run Go Backend
 ```bash
+go mod tidy
+```
+```bash
 go run main.go
 ```
 

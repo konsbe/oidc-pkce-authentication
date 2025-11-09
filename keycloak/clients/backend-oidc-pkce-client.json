@@ -9,10 +9,10 @@
             "enabled": true,
             "protocol": "openid-connect",
             "redirectUris": [
-                "http://localhost:5175/auth/callback"
+                "http://localhost:3000/callback"
             ],
             "webOrigins": [
-                "http://localhost:5175"
+                "http://localhost:3000"
             ],
             "standardFlowEnabled": true,
             "directAccessGrantsEnabled": true,
@@ -23,7 +23,7 @@
             "frontchannelLogout": true,
             "fullScopeAllowed": true,
             "attributes": {
-                "post.logout.redirect.uris": "http://localhost:5175/*",
+                "post.logout.redirect.uris": "http://localhost:3000/*",
                 "backchannel.logout.session.required": "true",
                 "backchannel.logout.revoke.offline.tokens": "false"
             },

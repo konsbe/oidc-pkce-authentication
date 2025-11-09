@@ -8,8 +8,9 @@
   "surrogateAuthRequired": false,
   "enabled": true,
   "alwaysDisplayInConsole": true,
+  "clientAuthenticatorType": "client-secret",
   "redirectUris": [
-    "http://localhost:5175/auth/callback"
+    "http://localhost:3000/callback"
   ],
   "webOrigins": [
     "*"
