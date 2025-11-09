@@ -9,7 +9,7 @@
         {
           "type": "password",
           "value": "Admin@123",
-          "temporary": true
+          "temporary": false
         }
       ],
       "emailVerified": true,
@@ -17,7 +17,7 @@
       "lastName": "USER",
       "email": "vomt@nomail.com",
       "disableableCredentialTypes": [],
-      "requiredActions": ["UPDATE_PASSWORD"],
+      "requiredActions": [],
       "notBefore": 0,
       "access": {
         "manageGroupMembership": true,
@@ -36,7 +36,7 @@
         {
           "type": "password",
           "value": "Viewer@123",
-          "temporary": true
+          "temporary": false
         }
       ],
       "emailVerified": true,
@@ -44,7 +44,7 @@
       "lastName": "VIEWER",
       "email": "vomtviewer@nomail.com",
       "disableableCredentialTypes": [],
-      "requiredActions": ["UPDATE_PASSWORD"],
+      "requiredActions": [],
       "notBefore": 0,
       "access": {
         "manageGroupMembership": true,
@@ -63,7 +63,7 @@
         {
           "type": "password",
           "value": "Editor@123",
-          "temporary": true
+          "temporary": false
         }
       ],
       "emailVerified": true,
@@ -71,7 +71,7 @@
       "lastName": "EDITOR",
       "email": "vomteditor@nomail.com",
       "disableableCredentialTypes": [],
-      "requiredActions": ["UPDATE_PASSWORD"],
+      "requiredActions": [],
       "notBefore": 0,
       "access": {
         "manageGroupMembership": true,
@@ -90,7 +90,7 @@
         {
           "type": "password",
           "value": "CustNOCUser123!",
-          "temporary": true
+          "temporary": false
         }
       ],
       "emailVerified": true,
@@ -98,7 +98,7 @@
       "lastName": "User",
       "email": "customernocuser@nomail.com",
       "disableableCredentialTypes": [],
-      "requiredActions": ["UPDATE_PASSWORD"],
+      "requiredActions": [],
       "notBefore": 0,
       "access": {
         "manageGroupMembership": true,
@@ -117,7 +117,7 @@
         {
           "type": "password",
           "value": "CustNocAdmin123!",
-          "temporary": true
+          "temporary": false
         }
       ],
       "emailVerified": true,
@@ -125,7 +125,7 @@
       "lastName": "Administrator",
       "email": "customernocadmin@nomail.com",
       "disableableCredentialTypes": [],
-      "requiredActions": ["UPDATE_PASSWORD"],
+      "requiredActions": [],
       "notBefore": 0,
       "access": {
         "manageGroupMembership": true,
@@ -144,7 +144,7 @@
         {
           "type": "password",
           "value": "CNFCareEng123!",
-          "temporary": true
+          "temporary": false
         }
       ],
       "emailVerified": true,
@@ -152,7 +152,7 @@
       "lastName": "Engineer",
       "email": "nokiacnfcareeng@nomail.com",
       "disableableCredentialTypes": [],
-      "requiredActions": ["UPDATE_PASSWORD"],
+      "requiredActions": [],
       "notBefore": 0,
       "access": {
         "manageGroupMembership": true,

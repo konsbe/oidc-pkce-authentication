@@ -12,7 +12,8 @@
                 "http://localhost:3000/callback"
             ],
             "webOrigins": [
-                "http://localhost:3000"
+                "http://localhost:3000",
+                "http://localhost:5175"
             ],
             "standardFlowEnabled": true,
             "directAccessGrantsEnabled": true,
@@ -23,7 +24,8 @@
             "frontchannelLogout": true,
             "fullScopeAllowed": true,
             "attributes": {
-                "post.logout.redirect.uris": "http://localhost:3000/*",
+                "pkce.code.challenge.method": "S256",
+                "post.logout.redirect.uris": "http://localhost:5175/*",
                 "backchannel.logout.session.required": "true",
                 "backchannel.logout.revoke.offline.tokens": "false"
             },
@@ -112,16 +114,5 @@
         }
     ],
     "roles": {},
-    "users": [
-        {
-            "username": "service-account-backend",
-            "enabled": true,
-            "serviceAccountClientId": "backend-oidc-pkce-client",
-            "realmRoles": [
-                "admin",
-                "editor",
-                "viewer"
-            ]
-        }
-    ]
+    "users": []
 }

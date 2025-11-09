@@ -46,9 +46,7 @@ func main() {
 		ClientSecret: "", // for public clients, leave empty
 		RedirectURL:  redirectURL,
 		Endpoint:     provider.Endpoint(),
-		// Scopes:       []string{oidc.ScopeOpenID, "profile", "email"},
-		Scopes: []string{"openid", "profile", "email", "offline_access"},
-
+		Scopes:       []string{"openid", "profile", "email"},
 	}
 
 	// Secure cookie session store
@@ -73,8 +71,8 @@ func main() {
 	r := chi.NewRouter()
 	// ✅ Add this CORS middleware
 	r.Use(cors.Handler(cors.Options{
-	AllowedOrigins:   []string{"*"},
-	AllowedMethods:   []string{"GET", "OPTIONS"},
+	AllowedOrigins:   []string{"http://localhost:5175", "http://localhost:5174"},
+	AllowedMethods:   []string{"GET", "POST", "OPTIONS"},
 	AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
 	AllowCredentials: true,
 	MaxAge:           300,

@@ -9,6 +9,14 @@ import (
 	"golang.org/x/oauth2"
 )
 
+func generateRandomString(length int) (string, error) {
+	b := make([]byte, length)
+	if _, err := rand.Read(b); err != nil {
+		return "", err
+	}
+	return base64.RawURLEncoding.EncodeToString(b), nil
+}
+
 func generatePKCE() (verifier string, challenge string, err error) {
 	b := make([]byte, 32)
 	if _, err = rand.Read(b); err != nil {
@@ -24,7 +32,12 @@ func generatePKCE() (verifier string, challenge string, err error) {
 }
 
 func HandleLogin(w http.ResponseWriter, r *http.Request) {
-	state := "some-random-state"
+	// Generate random state
+	state, err := generateRandomString(32)
+	if err != nil {
+		http.Error(w, "Failed to generate state", http.StatusInternalServerError)
+		return
+	}
 
 	// PKCE
 	codeVerifier, codeChallenge, err := generatePKCE()
@@ -40,11 +53,14 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 	}
 	session.Values["state"] = state
 	session.Values["code_verifier"] = codeVerifier
-	session.Save(r, w)
+	
+	if err := session.Save(r, w); err != nil {
+		http.Error(w, "Failed to save session", http.StatusInternalServerError)
+		return
+	}
 
 	authURL := OAuthConfig.AuthCodeURL(
 		state,
-		oauth2.AccessTypeOffline,
 		oauth2.SetAuthURLParam("code_challenge", codeChallenge),
 		oauth2.SetAuthURLParam("code_challenge_method", "S256"),
 	)

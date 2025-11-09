@@ -21,8 +21,15 @@ func HandleCallback(w http.ResponseWriter, r *http.Request) {
 
 	// Verify state matches
 	queryState := r.URL.Query().Get("state")
-	if queryState != session.Values["state"] {
-		log.Printf("❌ State mismatch: got %s, expected %v", queryState, session.Values["state"])
+	sessionState, ok := session.Values["state"].(string)
+	if !ok {
+		log.Printf("❌ No state found in session! Session values: %+v", session.Values)
+		http.Error(w, "No state in session", http.StatusBadRequest)
+		return
+	}
+	
+	if queryState != sessionState {
+		log.Printf("❌ State mismatch: got %s, expected %s", queryState, sessionState)
 		http.Error(w, "Invalid state", http.StatusBadRequest)
 		return
 	}

@@ -1,15 +1,4 @@
 {
     "ifResourceExists": "OVERWRITE",
-    "users": [
-        {
-            "username": "service-account-backend",
-            "enabled": true,
-            "serviceAccountClientId": "backend-oidc-pkce-client",
-            "realmRoles": [
-                "admin",
-                "editor",
-                "viewer"
-            ]
-        }
-    ]
+    "users": []
 }
