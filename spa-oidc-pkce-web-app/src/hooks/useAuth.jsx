@@ -6,12 +6,11 @@ import Keycloak from 'keycloak-js';
 
 
 const keycloakInit = new Keycloak({
-  url: 'http://localhost:8080/',
-  realm: 'oidc-pkce',
+  url: 'http://localhost:8080/access',
+  realm: 'vomt',
   clientId: 'spa-oidc-pkce-client',
   // clientSecret: 'your-client-secret' // Add your client secret here if client authentication and authorization is enable
 });
-
 
 const useAuth = () => {
   const [keycloak, setKeycloak] = useState()

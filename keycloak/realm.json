@@ -1,0 +1,14 @@
+{
+  "realm": "vomt",
+  "enabled": true,
+  "sslRequired": "external",
+  "loginTheme": "nokia-csf",
+  "roles": {
+    "realm": [
+      { "name": "admin" },
+      { "name": "editor" },
+      { "name": "viewer" }
+    ]
+  }
+}
+

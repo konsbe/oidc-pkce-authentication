@@ -366,9 +366,9 @@ Note: Since our app does not rely on Keycloak’s browser session (e.g., `keyclo
 
 ### 1. Scaffold the Go backend
 ```bash
-mkdir oidc-proxy-go
-cd oidc-proxy-go
-go mod init oidc-proxy-go
+mkdir oidc-service-go
+cd oidc-service-go
+go mod init oidc-service-go
 ```
 
 ### 2. Install dependencies

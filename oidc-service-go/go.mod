@@ -1,4 +1,4 @@
-module oidc-proxy-go
+module oidc-service-go
 
 go 1.23.0
 

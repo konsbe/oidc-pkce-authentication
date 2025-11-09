@@ -1,0 +1,12 @@
+{
+  "ifResourceExists": "OVERWRITE",
+  "users": [
+    {
+      "username": "service-account-grafana",
+      "enabled": true,
+      "serviceAccountClientId": "grafana",
+      "realmRoles": ["admin", "editor", "viewer"]
+    }
+  ]
+}
+

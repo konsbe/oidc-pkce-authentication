@@ -1,0 +1,15 @@
+{
+    "ifResourceExists": "OVERWRITE",
+    "users": [
+        {
+            "username": "service-account-spa",
+            "enabled": true,
+            "serviceAccountClientId": "spa-oidc-pkce-client",
+            "realmRoles": [
+                "admin",
+                "editor",
+                "viewer"
+            ]
+        }
+    ]
+}

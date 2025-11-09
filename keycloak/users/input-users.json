@@ -1,0 +1,168 @@
+{
+  "ifResourceExists": "OVERWRITE",
+  "users": [
+    {
+      "username": "vomtadmin",
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Admin@123",
+          "temporary": true
+        }
+      ],
+      "emailVerified": true,
+      "firstName": "VOMT",
+      "lastName": "USER",
+      "email": "vomt@nomail.com",
+      "disableableCredentialTypes": [],
+      "requiredActions": ["UPDATE_PASSWORD"],
+      "notBefore": 0,
+      "access": {
+        "manageGroupMembership": true,
+        "view": true,
+        "mapRoles": true,
+        "impersonate": true,
+        "manage": true
+      },
+      "realmRoles": ["admin", "editor", "viewer"]
+    },
+    {
+      "username": "vomtviewer",
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Viewer@123",
+          "temporary": true
+        }
+      ],
+      "emailVerified": true,
+      "firstName": "VOMT",
+      "lastName": "VIEWER",
+      "email": "vomtviewer@nomail.com",
+      "disableableCredentialTypes": [],
+      "requiredActions": ["UPDATE_PASSWORD"],
+      "notBefore": 0,
+      "access": {
+        "manageGroupMembership": true,
+        "view": true,
+        "mapRoles": true,
+        "impersonate": true,
+        "manage": true
+      },
+      "realmRoles": ["viewer"]
+    },
+    {
+      "username": "vomteditor",
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Editor@123",
+          "temporary": true
+        }
+      ],
+      "emailVerified": true,
+      "firstName": "VOMT",
+      "lastName": "EDITOR",
+      "email": "vomteditor@nomail.com",
+      "disableableCredentialTypes": [],
+      "requiredActions": ["UPDATE_PASSWORD"],
+      "notBefore": 0,
+      "access": {
+        "manageGroupMembership": true,
+        "view": true,
+        "mapRoles": true,
+        "impersonate": true,
+        "manage": true
+      },
+      "realmRoles": ["editor"]
+    },
+    {
+      "username": "customernocuser",
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "CustNOCUser123!",
+          "temporary": true
+        }
+      ],
+      "emailVerified": true,
+      "firstName": "Customer NOC",
+      "lastName": "User",
+      "email": "customernocuser@nomail.com",
+      "disableableCredentialTypes": [],
+      "requiredActions": ["UPDATE_PASSWORD"],
+      "notBefore": 0,
+      "access": {
+        "manageGroupMembership": true,
+        "view": true,
+        "mapRoles": true,
+        "impersonate": true,
+        "manage": true
+      },
+      "realmRoles": ["viewer"]
+    },
+    {
+      "username": "customernocadmin",
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "CustNocAdmin123!",
+          "temporary": true
+        }
+      ],
+      "emailVerified": true,
+      "firstName": "Customer NOC",
+      "lastName": "Administrator",
+      "email": "customernocadmin@nomail.com",
+      "disableableCredentialTypes": [],
+      "requiredActions": ["UPDATE_PASSWORD"],
+      "notBefore": 0,
+      "access": {
+        "manageGroupMembership": true,
+        "view": true,
+        "mapRoles": true,
+        "impersonate": true,
+        "manage": true
+      },
+      "realmRoles": ["admin"]
+    },
+    {
+      "username": "nokiacnfcareeng",
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "CNFCareEng123!",
+          "temporary": true
+        }
+      ],
+      "emailVerified": true,
+      "firstName": "Nokia CNF Care",
+      "lastName": "Engineer",
+      "email": "nokiacnfcareeng@nomail.com",
+      "disableableCredentialTypes": [],
+      "requiredActions": ["UPDATE_PASSWORD"],
+      "notBefore": 0,
+      "access": {
+        "manageGroupMembership": true,
+        "view": true,
+        "mapRoles": true,
+        "impersonate": true,
+        "manage": true
+      },
+      "realmRoles": ["editor"]
+    }
+  ]
+}
+

@@ -12,7 +12,7 @@ import (
 	"golang.org/x/oauth2"
 
 	"encoding/gob"
-	"oidc-proxy-go/handlers" // ✅ Update to match your module name
+	"oidc-service-go/handlers"
 
 	"github.com/go-chi/cors"
 )
@@ -22,7 +22,7 @@ func main() {
 
 	// Configuration
 	clientID := "backend-oidc-pkce-client"
-	keycloakURL := "http://localhost:8080/realms/oidc-pkce"
+	keycloakURL := "http://localhost:8080/realms/vomt"
 	redirectURL := "http://localhost:3000/callback"
 
 	// ✅ Register types used in session store
@@ -59,7 +59,7 @@ func main() {
 		Secure:   false,
 		SameSite: http.SameSiteLaxMode,
 		MaxAge:   60 * 60 * 8,
-		Domain:   "", // ← change this to empty string for localhost cross-origin to work
+		Domain:   "", 
 	}
 
 	// ✅ Inject dependencies into handlers
@@ -73,8 +73,8 @@ func main() {
 	r := chi.NewRouter()
 	// ✅ Add this CORS middleware
 	r.Use(cors.Handler(cors.Options{
-	AllowedOrigins:   []string{"http://localhost:5175"}, // use the exact origin from browser
-	AllowedMethods:   []string{"GET", "POST", "OPTIONS"},
+	AllowedOrigins:   []string{"*"},
+	AllowedMethods:   []string{"GET", "OPTIONS"},
 	AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
 	AllowCredentials: true,
 	MaxAge:           300,

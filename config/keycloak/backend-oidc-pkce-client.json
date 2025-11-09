@@ -8,9 +8,8 @@
   "surrogateAuthRequired": false,
   "enabled": true,
   "alwaysDisplayInConsole": true,
-  "clientAuthenticatorType": "client-secret",
   "redirectUris": [
-    "http://localhost:3000/callback"
+    "http://localhost:5175/auth/callback"
   ],
   "webOrigins": [
     "*"
@@ -22,6 +21,7 @@
   "implicitFlowEnabled": false,
   "directAccessGrantsEnabled": true,
   "serviceAccountsEnabled": false,
+  "authorizationServicesEnabled": false,
   "publicClient": true,
   "frontchannelLogout": true,
   "protocol": "openid-connect",
@@ -30,7 +30,7 @@
     "oidc.ciba.grant.enabled": "false",
     "client.secret.creation.time": "1744628174",
     "backchannel.logout.session.required": "true",
-    "post.logout.redirect.uris": "http://localhost:5175",
+    "post.logout.redirect.uris": "http://localhost:5175/*",
     "frontchannel.logout.session.required": "false",
     "oauth2.device.authorization.grant.enabled": "false",
     "display.on.consent.screen": "false",
