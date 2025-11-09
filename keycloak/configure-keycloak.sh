@@ -160,7 +160,8 @@ main() {
   log "🔧 Clients configured:"
   log "  - spog (configured for http://localhost:3000)"
   log "  - grafana"
-  log "  - topology"
+  log "  - spa-oidc-pkce (configured for http://localhost:8080/access)"
+  log "  - backend-oidc-pkce (configured for http://localhost:8080/access)"
   log ""
   log "🚀 Your local VOMT Keycloak is ready for development!"
 }

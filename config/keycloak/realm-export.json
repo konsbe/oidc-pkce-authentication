@@ -1,6 +1,6 @@
 {
   "id": "5e861a89-dabc-4678-b140-ea18a111d890",
-  "realm": "oidc-pkce",
+  "realm": "vomt",
   "displayName": "",
   "displayNameHtml": "",
   "notBefore": 0,
@@ -522,13 +522,13 @@
       "clientId": "account",
       "name": "${client_account}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/oidc-pkce/account/",
+      "baseUrl": "/realms/vomt/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/oidc-pkce/account/*"
+        "/realms/vomt/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -569,13 +569,13 @@
       "clientId": "account-console",
       "name": "${client_account-console}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/oidc-pkce/account/",
+      "baseUrl": "/realms/vomt/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/oidc-pkce/account/*"
+        "/realms/vomt/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -812,13 +812,13 @@
       "clientId": "security-admin-console",
       "name": "${client_security-admin-console}",
       "rootUrl": "${authAdminUrl}",
-      "baseUrl": "/admin/oidc-pkce/console/",
+      "baseUrl": "/admin/vomt/console/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/admin/oidc-pkce/console/*"
+        "/admin/vomt/console/*"
       ],
       "webOrigins": [
         "+"

@@ -33,9 +33,6 @@ Complete local replication of Nokia VOMT Keycloak setup for development.
 | `vomtadmin` | `Admin@123` | admin, editor, viewer | Full access user |
 | `vomtviewer` | `Viewer@123` | viewer | Read-only access |
 | `vomteditor` | `Editor@123` | editor | Edit permissions |
-| `customernocuser` | `CustNOCUser123!` | viewer | Customer NOC user |
-| `customernocadmin` | `CustNocAdmin123!` | admin | Customer NOC admin |
-| `nokiacnfcareeng` | `CNFCareEng123!` | editor | Nokia CNF Care engineer |
 
 ## 🔧 Configured Clients
 
@@ -44,6 +41,7 @@ Complete local replication of Nokia VOMT Keycloak setup for development.
 | `spog` | Main SPOG client | **Root URL**: http://localhost:3000/<br>**Redirect URIs**: http://localhost:3000/*<br>**Post Logout URIs**: http://localhost:3000/*<br>**Web Origins**: * |
 | `grafana` | Grafana integration | Standard service client |
 | `spa-oidc-pkce-client` | SPA oidc integration | Standard service client |
+| `backend-oidc-pkce-client` | Backend oidc integration | Standard service client |
 
 ## 🚀 For Your Frontend (localhost:3000)
 
@@ -76,7 +74,8 @@ local-deployment/
 ├── clients/                    # Client configurations
 │   ├── spog.json
 │   ├── grafana.json
-│   └── topology.json
+│   ├── spa-oidc-pkce-client.json
+│   └── backend-oidc-pkce-client.json
 └── users/
     └── input-users.json        # User definitions with roles
 ```
