@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import useAuth from './hooks/useAuth';
+import { useFetchData } from './hooks/useFetchData';
 
 
 const getToken = async (setInfoMessage) => {
@@ -9,7 +10,7 @@ const getToken = async (setInfoMessage) => {
   });
   
   if (!res.ok) {
-    setInfoMessage('❌ Not authenticated or token missing');
+    setInfoMessage('Not authenticated or token missing');
     return;
   }
 
@@ -21,8 +22,9 @@ const getToken = async (setInfoMessage) => {
 function App() {
   const [infoMessage, setInfoMessage] = useState('');
   const { user, loading } = useAuth();
+  const { users } = useFetchData();
+  console.log("users: ", users);
   
-
   useEffect(() => {
     if (user) {
       getToken(setInfoMessage);

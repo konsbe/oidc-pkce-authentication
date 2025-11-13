@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.81.1",
     "@testing-library/react": "^16.3.0",
     "backend-oidc-pkce-web-app": "file:",
     "react": "^19.0.0",
