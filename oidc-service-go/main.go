@@ -82,6 +82,8 @@ func main() {
 	r.Get("/callback", handlers.HandleCallback)
 	r.Get("/auth/session", handlers.HandleSession)
 	r.Get("/auth/token", handlers.HandleAccessToken)
+	r.Get("/auth/supabase-token", handlers.HandleSupabaseToken)
+	r.Get("/auth/supabase-jwt", handlers.HandleSupabaseJWT)
 	r.Post("/logout", handlers.HandleLogout)
 
 	log.Println("✅ Server listening on :3000")
