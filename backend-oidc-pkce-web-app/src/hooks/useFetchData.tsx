@@ -3,35 +3,35 @@ import { getSupabaseJWT, createAuthenticatedSupabaseClient } from "../supabase-c
 
 export const useFetchData = () => {
 
-    const [users, setUsers] = useState<any>([]);
+    const [products, setProducts] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    
-    async function getUsers() {
+
+    async function getProducts() {
         try {
-            setLoading(true);      
+            setLoading(true);
             // Get the JWT from Keycloak
             const jwt = await getSupabaseJWT();
-            
+
             if (!jwt) {
                 const errorMsg = "Failed to authenticate with Keycloak";
                 setError(errorMsg);
                 return;
-            }    
+            }
 
             // Create authenticated Supabase client with the JWT
             const authenticatedSupabase = createAuthenticatedSupabaseClient(jwt);
-       
+
             const { data, error: queryError, count } = await authenticatedSupabase
-                .from("users")
+                .from("products")
                 .select("*", { count: 'exact' });
-            
+
             if (queryError) {
                 setError(queryError.message);
                 return;
             }
-            
-            setUsers(data || []);
+
+            setProducts(data || []);
 
         } catch (error) {
             setError(error instanceof Error ? error.message : String(error));
@@ -42,9 +42,9 @@ export const useFetchData = () => {
     }
 
     useEffect(() => {
-        getUsers();
+        getProducts();
     }, []);
-    
-    return { users, loading, error }
+
+    return { products, loading, error }
 
 }

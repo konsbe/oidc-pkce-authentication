@@ -26,7 +26,7 @@ type SupabaseJWTClaims struct {
 func HandleSupabaseJWT(w http.ResponseWriter, r *http.Request) {
 	session, err := CookieStore.Get(r, "auth-session")
 	if err != nil {
-		log.Printf("❌ Failed to get session: %v", err)
+		log.Printf("Failed to get session: %v", err)
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
@@ -34,7 +34,7 @@ func HandleSupabaseJWT(w http.ResponseWriter, r *http.Request) {
 	// Get user info from session
 	userInfoJSON, ok := session.Values["userinfo"].(string)
 	if !ok || userInfoJSON == "" {
-		log.Println("❌ No user info in session")
+		log.Println("No user info in session")
 		http.Error(w, "No user info", http.StatusUnauthorized)
 		return
 	}
@@ -42,7 +42,7 @@ func HandleSupabaseJWT(w http.ResponseWriter, r *http.Request) {
 	// Parse user info
 	var userInfo map[string]interface{}
 	if err := json.Unmarshal([]byte(userInfoJSON), &userInfo); err != nil {
-		log.Printf("❌ Failed to parse user info: %v", err)
+		log.Printf("Failed to parse user info: %v", err)
 		http.Error(w, "Invalid user info", http.StatusInternalServerError)
 		return
 	}
@@ -76,7 +76,7 @@ func HandleSupabaseJWT(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	log.Printf("🔍 Creating JWT with sub=%s, email=%s, role=%s", sub, email, claims.Role)
+	log.Printf("Creating JWT with sub=%s, email=%s, role=%s", sub, email, claims.Role)
 
 	// TODO: Get this from environment variable in production
 	// This should match your Supabase JWT Secret
@@ -85,7 +85,7 @@ func HandleSupabaseJWT(w http.ResponseWriter, r *http.Request) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	signedToken, err := token.SignedString(supabaseSecret)
 	if err != nil {
-		log.Printf("❌ Failed to sign JWT: %v", err)
+		log.Printf("Failed to sign JWT: %v", err)
 		http.Error(w, "Failed to create token", http.StatusInternalServerError)
 		return
 	}
@@ -98,5 +98,5 @@ func HandleSupabaseJWT(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 
-	log.Printf("✅ Supabase JWT generated for user: %s", email)
+	log.Printf("Supabase JWT generated for user: %s", email)
 }

@@ -8,7 +8,7 @@ const getToken = async (setInfoMessage) => {
   const res = await fetch('http://localhost:3000/auth/token', {
     credentials: 'include',
   });
-  
+
   if (!res.ok) {
     setInfoMessage('Not authenticated or token missing');
     return;
@@ -22,14 +22,14 @@ const getToken = async (setInfoMessage) => {
 function App() {
   const [infoMessage, setInfoMessage] = useState('');
   const { user, loading } = useAuth();
-  const { users, loading: usersLoading, error: usersError } = useFetchData();
-    
+  const { products, loading: productsLoading, error: productsError } = useFetchData();
+
   useEffect(() => {
     if (user) {
       getToken(setInfoMessage);
     }
-  }, [ user ]);
-  
+  }, [user]);
+
 
   if (loading) return <div>🔄 Checking session...</div>;
   if (!user) {
@@ -39,7 +39,7 @@ function App() {
     }, 2000); // or show a message first
     return <div>Redirecting to login...</div>;
   }
-  
+
   return (
     <div className='d-flex flex-col space-between'>
       <div className="all-buttons">
@@ -47,12 +47,12 @@ function App() {
         <button onClick={() => getToken(setInfoMessage)}>Get Access Token</button>
         <button onClick={() => setInfoMessage(
           <div className="card">
-            <h3>Supabase Users ({users.length})</h3>
-            {usersLoading && <p>🔄 Loading users from Supabase...</p>}
-            {usersError && <p style={{ color: 'red' }}>❌ Error: {usersError}</p>}
-            {!usersLoading && !usersError && users.length === 0 && <p>No users found</p>}
-            {!usersLoading && !usersError && users.length > 0 && (
-              <pre>{JSON.stringify(users, null, 2)}</pre>
+            <h3>Supabase Products ({products.length})</h3>
+            {productsLoading && <p>🔄 Loading products from Supabase...</p>}
+            {productsError && <p style={{ color: 'red' }}>❌ Error: {productsError}</p>}
+            {!productsLoading && !productsError && products.length === 0 && <p>No products found</p>}
+            {!productsLoading && !productsError && products.length > 0 && (
+              <pre>{JSON.stringify(products, null, 2)}</pre>
             )}
           </div>
         )}>show table</button>

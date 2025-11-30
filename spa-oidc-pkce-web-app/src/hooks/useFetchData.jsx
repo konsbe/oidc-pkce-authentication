@@ -1,42 +1,36 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { VITE_SUPABASE_PUBLISHABLE_KEY, VITE_SUPABASE_URL } from "../secrets";
+import { VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY } from "../secrets";
 
-// NOTE: For SPA, we can't use Keycloak tokens directly with Supabase
-// Keycloak tokens won't pass Supabase RLS validation
-// You should use the backend-oidc-pkce-web-app approach instead
+const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY);
 
 export const useFetchData = () => {
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [users, setUsers] = useState([]);
+    const [error, setError] = useState();
 
-    async function getUsers() {
+    async function getProducts() {
         try {
             setLoading(true);
-            
-            // Create basic Supabase client (anon key)
-            const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY);
-            
-            const { data, error: queryError } = await supabase.from("users").select();
-            
-            if (queryError) {
-                setError(queryError.message);
-                return;
+            setError(null);
+            const { data, error } = await supabase.from("products").select();
+            if (error) {
+                setError(error);
+            } else {
+                setProducts(data);
             }
-
-            setUsers(data || []);
-
         } catch (error) {
-            setError(error.message);
+            setError(error);
         } finally {
             setLoading(false);
         }
     }
-
     useEffect(() => {
-        getUsers();
+        getProducts();
     }, []);
 
-    return { users, loading, error };
-};
+
+    return { products, loading, error };
+}
+
+export default useFetchData;
