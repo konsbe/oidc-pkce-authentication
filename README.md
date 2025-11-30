@@ -2,6 +2,7 @@
 [OIDC-PKCE auth documentation by Okta](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)
 
 This project demonstrates a secure OpenID Connect (OIDC) authentication architecture using:
+- A **Keycloak (IAM Provider) for manage RBAC**
 - A **React (Vite) Single Page Application (SPA)**
 - A **Go backend**
 - **Keycloak** as the Identity Provider (IdP)
@@ -9,6 +10,12 @@ This project demonstrates a secure OpenID Connect (OIDC) authentication architec
 ## Overview
 
 We implement two authentication flows:
+
+### 0. ✅ Setup Keycloak
+Go to keycloak directory `cd keycloak`
+Run keycloak enviroment `bash manage.sh start`
+
+After the installation of keycloak container you can access keycloak on http://localhost:8080/access
 
 ### 1. ❌ Initial Setup: SPA-only OIDC (insecure by design)
 This uses `keycloak-js` directly in the frontend:
