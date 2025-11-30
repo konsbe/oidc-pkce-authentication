@@ -1,0 +1,4 @@
+const supabaseUrl = "https://ndpjycaghrjmlpndrikz.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5kcGp5Y2FnaHJqbWxwbmRyaWt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0NDc3NDIsImV4cCI6MjA4MDAyMzc0Mn0.gfLhcumJuZw9Jn6_U4QNEBmlVrG0WG1E7VNwRDH8vNM";
+
+export { supabaseUrl, supabaseAnonKey };
